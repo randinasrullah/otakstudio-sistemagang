@@ -95,6 +95,7 @@ class Admin extends CI_Controller
 
     public function tambahketerangan($id) {
         $keterangan = $this->input->post("ket");
+        echo $keterangan;
         die();
         $data = array(
             'status' => 4,
