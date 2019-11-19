@@ -14,6 +14,7 @@ class Daftar extends CI_Controller {
 	{
         $this->load->view('user.php');
 
+        
     }
     
     public function registrasi() {
