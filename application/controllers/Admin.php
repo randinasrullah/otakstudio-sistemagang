@@ -18,6 +18,7 @@ class Admin extends CI_Controller
 
         function tgl_indo($tanggal)
         {
+            $okey;
             $bulan = array(
                 1 =>   'Januari',
                 'Februari',
