@@ -46,11 +46,13 @@
             background-image: url(<?= base_url('vendor/') ?>gambar/pexels.jpeg);
             background-size: cover;
         }
-        .mt-3, .my-3 {
-    margin-right: 26px;
-    margin-top: 1rem!important;
-    float: right;
-}
+
+        .mt-3,
+        .my-3 {
+            margin-right: 26px;
+            margin-top: 1rem !important;
+            float: right;
+        }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,10 +64,10 @@
 </head>
 
 <body>
-   <div class="button"> 
-   <a href="<?= base_url('Login/Logout'); ?>">
-    <button type="button" class="btn btn-primary logout mt-3">Logout</button>
-    </a>
+    <div class="button">
+        <a href="<?= base_url('Login/Logout'); ?>">
+            <button type="button" class="btn btn-primary logout mt-3">Logout</button>
+        </a>
     </div>
     <div class="middle">
         <div class="card text-white bg-primary mx-auto align-self-center" style="width: 18rem;">
@@ -75,7 +77,7 @@
                 <p class="card-text"></p>
             </div>
             <ul class="list-group list-group-flush">
-            <?php $nama = $this->session->userdata('nama');  ?>
+                <?php $nama = $this->session->userdata('nama');  ?>
                 <li class="list-group-item"><?= $nama; ?></li>
                 <li class="list-group-item"><?= $this->session->userdata('alamat'); ?></li>
                 <li class="list-group-item"><?= $this->session->userdata('email'); ?></li>
@@ -83,15 +85,20 @@
             </ul>
             <div class="card-body a">
                 <a>Status Berkas : </a> <br>
-                <?php if($this->session->userdata('status') == '0' ) { ?>
-                         <p>Berkas sudah terupload. <br> Harap tunggu perubahan status beberapa hari kedepan.</p>
-                      <?php } else if ($this->session->userdata('status') == '1') { ?>
-                            <p>Selamat anda diterima <br> Harap menghubungi HR Otakstudio (082222910192).</p>
-                    <?php } else if ($this->session->userdata('status') == '2') { ?>
-                            <p>Maaf anda belum memenuhi kriteria magang di Otakstudio.</p>
+                <?php if ($this->session->userdata('status') == '0') { ?>
+                    <p>Berkas sudah terupload. <br> Harap tunggu perubahan status beberapa hari kedepan.</p>
+                <?php } else if ($this->session->userdata('status') == '1') { ?>
+                    <p>Selamat anda diterima <br> Harap menghubungi HR Otakstudio (082222910192).</p>
+                <?php } else if ($this->session->userdata('status') == '2') { ?>
+                    <p>Maaf anda belum memenuhi kriteria magang di Otakstudio.</p>
+                <?php } else if ($this->session->userdata('status') == '4') { ?>
+                    <p><?php echo $this->session->userdata('pesan'); ?></p><a href="<?= base_url('Dashboard'); ?>">
+                        <p> Klik disini untuk mengupload ulang berkas</p>
                     <?php } else { ?>
-                            <p>Belum mengisi form dan mengupload berkas. </p> <a href="<?= base_url('Dashboard'); ?>"> <p> Klik disini untuk mengisi form dan upload berkas</p></a>
-                    <?php } ?> 
+                        <p>Belum mengisi form dan mengupload berkas. </p> <a href="<?= base_url('Dashboard'); ?>">
+                            <p> Klik disini untuk mengisi form dan upload berkas</p>
+                        </a>
+                    <?php } ?>
             </div>
         </div>
     </div>
