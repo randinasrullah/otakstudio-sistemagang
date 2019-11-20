@@ -55,7 +55,7 @@
                     <?php } else if ($key['status'] == '3') { ?>
                             <p>Belum Upload Berkas</p>
                     <?php } else if ($key['status'] == '4') { ?>
-                      <p> Belum Revisi Berkas <P>
+                      <p> Belum Upload Berkas Revisi <P>
                     <?php } else { ?>
                             <p>Ditolak</p>
                     <?php  } ?>
