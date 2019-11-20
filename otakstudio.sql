@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 09 Okt 2019 pada 19.14
--- Versi server: 10.3.16-MariaDB
--- Versi PHP: 7.3.7
+-- Host: localhost
+-- Generation Time: Nov 20, 2019 at 05:31 AM
+-- Server version: 8.0.17
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,78 +25,99 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login`
+-- Table structure for table `pengguna`
 --
 
-CREATE TABLE `login` (
+CREATE TABLE `pengguna` (
   `id` int(10) NOT NULL,
-  `user` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `nama` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `handphone` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `pesan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `level` int(11) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `login`
+-- Dumping data for table `pengguna`
 --
 
-INSERT INTO `login` (`id`, `user`, `password`) VALUES
-(1, 'admin', 'admin');
+INSERT INTO `pengguna` (`id`, `nama`, `alamat`, `email`, `handphone`, `username`, `password`, `pesan`, `level`, `status`) VALUES
+(1, '', '', '', '', 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL, 0, 0),
+(13, 'Randy Efan Jayaputra', 'Entrop', 'randyrandyrej8@gmail.com', '082222214905', 'randyefan', '345f321bfb7efa30ccd6d6fe043d0adc', 'cv kurang lengkap, kurang riwayat hidup', 1, 4),
+(14, 'Randi Nasrullah', 'Kaliurang', 'randikamang@yahoo.com', '0811488119', 'kamang', '9c12761905d006da21292f566cbeadff', NULL, 1, 3),
+(19, 'Amar Tukuwain', 'Jalan Kapten', 'amar@gmail.com', '089797997979', 'amar', '69b03793a01b14423c92c74e3a378d9a', NULL, 1, 3),
+(20, 'Hendry Wibowo', 'Jalan Kaliurang', 'patok@gmail.com', '088888888', 'patok', '00015ca80b73907f6b20c253890a9a4f', NULL, 1, 1),
+(21, 'kams', 'Jalan Kapten', 'kams@gmail.com', '082222222222222', 'kamangs', '827ccb0eea8a706c4c34a16891f84e7b', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_admin`
+-- Table structure for table `tb_otakstudio`
 --
 
-CREATE TABLE `tb_admin` (
+CREATE TABLE `tb_otakstudio` (
   `id` int(10) NOT NULL,
-  `nama` varchar(25) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `tanggal` date NOT NULL,
   `peminatan` varchar(20) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `cv` longblob NOT NULL,
-  `surat` longblob NOT NULL
+  `surat` longblob NOT NULL,
+  `idpengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_admin`
+-- Dumping data for table `tb_otakstudio`
 --
 
-INSERT INTO `tb_admin` (`id`, `nama`, `alamat`, `email`, `tanggal`, `peminatan`, `keterangan`, `cv`, `surat`) VALUES
-(13, 'randi nasrullah', 'jalan kaliurang', 'nasrullahrandi@gmail.com', '2019-10-02', 'Game', 'aa', 0x4c41504f52414e5f4b505f31353532333237332e706466, 0x4c41504f52414e5f4b505f3135353233323733312e706466);
+INSERT INTO `tb_otakstudio` (`id`, `tanggal`, `peminatan`, `keterangan`, `cv`, `surat`, `idpengguna`) VALUES
+(29, '2019-11-20', 'Game', 'yayaya', 0x73757261745f616b7469662e706466, 0x73757261745f7065726e79617461616e5f70656d61696e2e706466, 13);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `login`
+-- Indexes for table `pengguna`
 --
-ALTER TABLE `login`
+ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_admin`
+-- Indexes for table `tb_otakstudio`
 --
-ALTER TABLE `tb_admin`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tb_otakstudio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idpengguna` (`idpengguna`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `login`
+-- AUTO_INCREMENT for table `pengguna`
 --
-ALTER TABLE `login`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `pengguna`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_admin`
+-- AUTO_INCREMENT for table `tb_otakstudio`
 --
-ALTER TABLE `tb_admin`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `tb_otakstudio`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_otakstudio`
+--
+ALTER TABLE `tb_otakstudio`
+  ADD CONSTRAINT `idpengguna` FOREIGN KEY (`idpengguna`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
