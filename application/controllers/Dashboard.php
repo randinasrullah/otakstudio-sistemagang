@@ -27,6 +27,10 @@ class Dashboard extends CI_Controller
 
     public function tambah()
     {
+        if ($this->session->userdata('status') == '4') {
+            $id = $this->session->userdata('id');
+            $this->kp_model->hapus($id);
+        }
         $this->form_validation->set_rules('minat', 'minat', 'required');
         $this->form_validation->set_rules('keterangan', 'keterangan', 'required');
 

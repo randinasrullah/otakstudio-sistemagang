@@ -46,7 +46,7 @@
                 <ul class="navbar-nav">
                     <li>
                         <?php if($this->session->userdata('nama')==TRUE) { 
-                                    if($this->session->userdata('status')==3) {?>
+                                    if($this->session->userdata('status')==3 || $this->session->userdata('status')==4 ) {?>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                             Daftar Magang
                                         </button>
