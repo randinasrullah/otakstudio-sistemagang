@@ -23,6 +23,7 @@
                       <th class="text-center">Surat Pengantar</th>
                       <th class="text-center">Aksi</th>
                       <th class="text-center">Konfirmasi</th>
+                      <th class="text-center">Revisi</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -38,6 +39,7 @@
                       <th class="text-center">Surat Pengantar</th>
                       <th class="text-center">Aksi</th>
                       <th class="text-center">Konfimasi</th>
+                      <th class="text-center">Revisi</th>
                     </tr>
                   </tfoot>
 
@@ -56,15 +58,20 @@
                         <td class="text-center"><a href=<?= base_url('Dashboard/download/') . $key['surat'] ?>> <i class="fas fa-file-download fa-2x"></i> </a></td>
                         <td class="text-center"><a href="<?= base_url('Admin/hapusdata/') . $key['id'] ?>" onclick="return confirm('Anda Yakin Menghapus File Ini ?')" class="fas fa-trash fa-2x"></i></a></td>
                         <td class="text-center">
-                          <?php if ($key['status'] == '0') { ?>
+                          <?php if ($key['status'] == '0' || $key['status'] == '4') { ?>
                             <a href="<?= base_url('Admin/terima/') . $key['id'] ?>" onclick="return confirm('yakin mengirim konfirmasi diterima?')"><i class="fas fa-check fa-2x mr-3"></i></a>
-                            <a href="<?= base_url('Admin/tolak/') . $key['id'] ?>" onclick="return confirm('yakin mengirim konfirmasi ditolak? ')"><i class="fas fa-times fa-2x"></i></a>
-                            <a href="" data-toggle="modal" id="ubahh" data-target="#exampleModalCenter" data-id="<?=$key['id']?>"> <i class="far fa-sticky-note fa-2x"></i></a>
-                          <?php } else if ($key['status'] == '4'){ ?>
-                            <p>Pesan revisi sudah terkirim</p>
-                            <?php } else { ?>
-                              <p>Sudah melakukan konfirmasi status</p>
+                            <a href="<?= base_url('Admin/tolak/') . $key['id'] ?>" onclick="return confirm
+                            ('yakin mengirim konfirmasi ditolak? ')"><i class="fas fa-times fa-2x"></i></a>
+                          <?php } else { ?>
+                            <p>Sudah melakukan konfirmasi status</p>
                           <?php } ?>
+                        </td>
+                        <td class="text-center">
+                          <?php if($key['status'] == '0') { ?>
+                          <a href="" data-toggle="modal" id="ubahh" data-target="#exampleModalCenter" data-id="<?= $key['id'] ?>"> <i class="far fa-sticky-note fa-2x"></i></a>
+                          <?php } else { ?>
+                            <p> Sudah mengirim pesan revisi </p>
+                          <?php }?>
                         </td>
                       </tr>
                     <?php $i++;
@@ -87,21 +94,21 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                <div class="form-group">
-                  <form action="<?= base_url('Admin/tambahketerangan/') ?>" id="pesan" method="post" enctype="multipart/form-data">
-                    <input type="hidden" value="" id="id" name="id">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pesan"> </textarea>
+                  <div class="form-group">
+                    <form action="<?= base_url('Admin/tambahketerangan/') ?>" id="pesan" method="post" enctype="multipart/form-data">
+                      <input type="hidden" value="" id="id" name="id">
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pesan"> </textarea>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-              </form>
+                </form>
               </div>
             </div>
           </div>
-          
+
           <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
           <script type="text/Javascript">
             $(document).on("click", "#ubahh", function() {
