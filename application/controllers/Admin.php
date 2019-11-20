@@ -93,16 +93,16 @@ class Admin extends CI_Controller
         redirect('Admin');
     }
 
-    public function tambahketerangan($id) {
-        $keterangan = $this->input->post("ket");
-        echo $keterangan;
-        die();
+    public function tambahketerangan() {
+        $keterangan = $this->input->post("pesan");
+        $where = $this->input->post("id");
         $data = array(
             'status' => 4,
-            'keterangan' => $keterangan
+            'pesan' => $keterangan
         );
 
-        $this->kp_model->editketerangan($id, $data);
+        $this->kp_model->editketerangan($where, $data);
+        redirect('Admin');
     }
 
 }

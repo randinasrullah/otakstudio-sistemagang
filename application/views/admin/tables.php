@@ -59,9 +59,11 @@
                           <?php if ($key['status'] == '0') { ?>
                             <a href="<?= base_url('Admin/terima/') . $key['id'] ?>" onclick="return confirm('yakin mengirim konfirmasi diterima?')"><i class="fas fa-check fa-2x mr-3"></i></a>
                             <a href="<?= base_url('Admin/tolak/') . $key['id'] ?>" onclick="return confirm('yakin mengirim konfirmasi ditolak? ')"><i class="fas fa-times fa-2x"></i></a>
-                            <a href="" data-toggle="modal" id="ubah" data-target="#exampleModal<?php echo $key['id']; ?>"><i class="far fa-sticky-note fa-2x"></i></a>
-                          <?php } else { ?>
-                            <p>Sudah melakukan konfirmasi status</p>
+                            <a href="" data-toggle="modal" id="ubahh" data-target="#exampleModalCenter" data-id="<?=$key['id']?>"> <i class="far fa-sticky-note fa-2x"></i></a>
+                          <?php } else if ($key['status'] == '4'){ ?>
+                            <p>Pesan revisi sudah terkirim</p>
+                            <?php } else { ?>
+                              <p>Sudah melakukan konfirmasi status</p>
                           <?php } ?>
                         </td>
                       </tr>
@@ -73,40 +75,41 @@
             </div>
           </div>
 
-          <div class="modal fade" id="exampleModal<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg justify-content-center" role="document">
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Tambah Keterangan</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pesan</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <?php echo form_open_multipart('Admin/tambahketerangan/'); ?>
-                  <!-- <input type="hidden" name="idpengguna" value="<?= $user[0]['id']; ?>"> -->
-                  <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Keterangan</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="keterangan"><?=$id ?></textarea>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                <div class="form-group">
+                  <form action="<?= base_url('Admin/tambahketerangan/') ?>" id="pesan" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="" id="id" name="id">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="pesan"> </textarea>
                   </div>
                 </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
               </div>
-
-
             </div>
-            <!-- /.container-fluid -->
-
-
-
           </div>
-          <!-- End of Main Content -->
+          
+          <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
           <script type="text/Javascript">
-            $(document).on("click", "#ubah", function() {
-            var id = $(this).data('id');
-          });
-        </script>
+            $(document).on("click", "#ubahh", function() {
+              console.log("yes");
+              var id = $(this).data('id');
+  
+              $("#pesan #id").val(id);
+            });
+          </script>
+
+          <!-- End of Main Content -->
